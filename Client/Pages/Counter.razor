@@ -1,0 +1,76 @@
+﻿@page "/counter"
+<h1>Investment Calculator</h1>
+
+
+
+<h2> Enter Your Info Below</h2>
+<p>Starting Value</p>
+<p>
+    <input type="number"
+           name="startingVal"
+            />
+</p>
+<p>Salvage Value</p>
+<p>
+    <input type="number"
+           name="salvageVal"
+            />
+</p>
+<p>Estimated Life Time Of Asset</p>
+<p>
+    <input type="number"
+           name="estLifeTime"
+            />
+</p>
+<p>Age Of Assets In Years</p>
+<p>
+    <input type="number"
+           name="assetAgeInYrs"
+            />
+</p>
+<p>Type Of Depreciation</p>
+<p>
+    <input type="radio"
+           name="depreciation" /> 
+    Straight Line
+</p>
+<p>
+    <input type="radio"
+           name="depreciation" />
+    Double Declining
+</p>
+<p>
+    <button class="btn btn-success"
+            style="width:125px; height:50px">
+        Calculate Result
+    </button>
+    <button class="btn btn-secondary"
+            style="width:125px; height:50px"
+            >
+        Add To Table
+        
+    </button>
+</p>
+
+<p>
+    <textarea resize="none"
+              rows="5"
+              style="width :600px"
+              ></textarea>
+</p>
+
+
+
+ 
+<AssetTable Title="Asset Values in a graph"
+            aTable="@AssetTable.AssetValues"
+            getValuesFromId="@values"
+            Selected="@(pos) => RemoveFromBasket(pos))"
+            />
+
+
+@code {
+
+    private AssetTable AssetTable { get; } = new AssetTable()
+
+}

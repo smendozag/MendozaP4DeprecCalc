@@ -1,0 +1,55 @@
+﻿
+
+@if (aTable.AssetValues.Any())
+{
+
+    <h3>@Title</h3>
+    @foreach(var (val, pos) in AssetValues)
+    {
+
+        <ValueItem value="@val"
+                   ButtonTitle="Remove"
+                   ButtonClass="btn btn-danger"
+                   Selected="@(async (_)
+                   => await Selected.InvokeAsync(pos))"/>
+    }
+
+    <div class="row">
+        <div class="col"> Total</div>
+        <div class="col"> @Result</div>
+        <div class="col"> </div>
+    </div>  
+}
+@*@if (AssetTable.aTable.Any())
+{
+
+}*@
+
+
+@code {
+
+    [Parameter] public string Title { get; set; }
+
+    [Parameter]
+    public AssetTable aTable { get; set; }
+
+    [Parameter] public EventCallback<int> Selected { get; set; }
+
+    [Parameter] public decimal Result { get; set; }
+
+    [Parameter]
+    public Func<int, Values> getValuesFromId { get; set; }
+
+    public IEnumerable<(Values val, int pos)> AssetValues { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        //AssetTable assets = new AssetTable();
+        base.OnParametersSet();
+        AssetValues = aTable.Assets.Select((id, pos)
+                                => (val: getValuesFromId(id), pos: pos));
+        //Result = AssetValues.Select(Tuple => Tuple.val.Result)
+
+    }
+
+}

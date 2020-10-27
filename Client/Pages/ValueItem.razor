@@ -1,0 +1,36 @@
+﻿<div class="row">
+    <div class="col">
+        @value.StartingVal
+    </div>
+    <div class="col">
+        @value.SalvageVal
+    </div>
+    <div class="col">
+        @value.LifeTime
+    </div>
+    <div class="col">
+        @value.AgeOfAsset
+    </div>
+    <div class="col">
+        @value.Result
+    </div>
+    <div class="col">
+        <button class="@ButtonClass"
+                @onclick="@(async () => await Selected.InvokeAsync(value))">
+            @ButtonTitle
+        </button>
+    </div>
+
+</div>
+
+
+@code {
+    [Parameter] public Values value { get; set; }
+
+    [Parameter] public string ButtonTitle { get; set; }
+
+    [Parameter] public string ButtonClass { get; set; }
+
+    [Parameter] public EventCallback<Values> Selected { get; set; }
+
+}
