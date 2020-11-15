@@ -1,10 +1,10 @@
 ﻿
 
-@if (aTable.AssetValues.Any())
+@if (aTable.Assets.Any())
 {
-
     <h3>@Title</h3>
-    @foreach(var (val, pos) in AssetValues)
+
+    @foreach(var (val, pos) in AssetValues)//Assets.Select((id , pos) => (Form.GetValues(id), pos)))
     {
 
         <ValueItem value="@val"
@@ -15,41 +15,42 @@
     }
 
     <div class="row">
-        <div class="col"> Total</div>
+        <div class="col"> Result</div>
         <div class="col"> @Result</div>
         <div class="col"> </div>
     </div>  
 }
-@*@if (AssetTable.aTable.Any())
-{
-
-}*@
 
 
 @code {
 
     [Parameter] public string Title { get; set; }
 
-    [Parameter]
-    public AssetTable aTable { get; set; }
+    [Parameter] public AssetsTable aTable { get; set; }
 
     [Parameter] public EventCallback<int> Selected { get; set; }
 
     [Parameter] public decimal Result { get; set; }
 
-    [Parameter]
-    public Func<int, Values> getValuesFromId { get; set; }
+    [Parameter] public Func<int, Values> getValuesFromId { get; set; }
 
-    public IEnumerable<(Values val, int pos)> AssetValues { get; set; }
+    public IEnumerable<( Values val, int pos)> AssetValues { get; set; }
 
     protected override void OnParametersSet()
     {
-        //AssetTable assets = new AssetTable();
         base.OnParametersSet();
-        AssetValues = aTable.Assets.Select((id, pos)
-                                => (val: getValuesFromId(id), pos: pos));
-        //Result = AssetValues.Select(Tuple => Tuple.val.Result)
 
+
+        AssetValues = aTable.Assets.Select((id, pos)
+            => (pizza: getValuesFromId(id), pos: pos));
+
+
+        //Result = AssetValues.Select(tuple => tuple.val.Result).Sum();
+
+    }
+    public void setAsset()
+    {
+        Console.WriteLine("Asset has been added");
     }
 
 }

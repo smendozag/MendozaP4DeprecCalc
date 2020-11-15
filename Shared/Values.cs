@@ -6,14 +6,15 @@ namespace MendozaP4DeprecCalc.Shared
 {
     public class Values 
     {
+        
+        protected decimal startingVal;
+        protected decimal salvageVal;
+        protected int lifeTime;
+        protected int ageOfAsset;
 
-        public decimal startingVal;
-        public decimal salvageVal;
-        public int lifeTime;
-        public int ageOfAsset;
 
-
-        public decimal  Result{ get; set; }
+        public decimal  Result{ get; protected set; }
+        public int Id { get; set; }
 
         public decimal StartingVal 
         {
@@ -38,11 +39,15 @@ namespace MendozaP4DeprecCalc.Shared
             set { value = ageOfAsset; Calc(); }
         }
 
+        public Values() 
+        {
 
-        Values(decimal startVal , decimal salvageVal, int lifeTime
+        }
+        public Values(int id, decimal startVal , decimal salvageVal, int lifeTime
             , int ageOfAsset)
         {
-            this.StartingVal = startVal;
+            this.Id = id;
+            this.StartingVal = startVal; 
             this.SalvageVal = salvageVal;
             this.LifeTime = lifeTime;
             this.ageOfAsset = ageOfAsset;
@@ -50,7 +55,7 @@ namespace MendozaP4DeprecCalc.Shared
 
         public virtual void Calc()
         {
-            Result = 1;
+            Result = 200;
         }
     }
 }

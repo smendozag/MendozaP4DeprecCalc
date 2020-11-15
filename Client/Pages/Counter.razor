@@ -1,37 +1,63 @@
 ﻿@page "/counter"
 <h1>Investment Calculator</h1>
 
-
+<!-- "/"-->
+<!-- form -->
+<!--<h1>Our selection of pizzas</h1>
+@foreach (var value in State.Form.Values)
+{
+    <div class="row">
+        <div class="col">
+            @value.StartingVal
+        </div>
+        <div class="col">
+            @value.SalvageVal
+        </div>
+        
+        <div class="col">
+            <button class="btn btn-success"
+                    @onclick="@(() => AddToAsset(value))">
+                Add
+            </button>
+        </div>
+    </div>
+}-->
+<!-- End form -->
 
 <h2> Enter Your Info Below</h2>
 <p>Starting Value</p>
 <p>
     <input type="number"
            name="startingVal"
-            />
+           @bind="@StartingValue"
+           onfocus="this.value=''"/>
 </p>
 <p>Salvage Value</p>
 <p>
     <input type="number"
-           name="salvageVal"
-            />
+           name="salvageVal" 
+           @bind="@SalvageValue"
+           onfocus="this.value = ''"/>
 </p>
 <p>Estimated Life Time Of Asset</p>
 <p>
     <input type="number"
            name="estLifeTime"
-            />
+           @bind="@LifeTime"
+           onfocus="this.value = ''"/>
 </p>
 <p>Age Of Assets In Years</p>
 <p>
     <input type="number"
            name="assetAgeInYrs"
-            />
+           @bind="@AgeOfAsset"
+           onfocus="this.value = ''"/>
+
 </p>
 <p>Type Of Depreciation</p>
 <p>
     <input type="radio"
-           name="depreciation" /> 
+           name="depreciation" />
     Straight Line
 </p>
 <p>
@@ -46,31 +72,79 @@
     </button>
     <button class="btn btn-secondary"
             style="width:125px; height:50px"
-            >
+            @onclick="@(() => AddToAsset(value))">
         Add To Table
-        
+
     </button>
 </p>
 
 <p>
     <textarea resize="none"
               rows="5"
-              style="width :600px"
-              ></textarea>
+              style="width :600px"></textarea>
+    @Math.Round(value.Result, 2)
 </p>
 
-
-
- 
-<AssetTable Title="Asset Values in a graph"
-            aTable="@AssetTable.AssetValues"
-            getValuesFromId="@values"
-            Selected="@(pos) => RemoveFromBasket(pos))"
+<AssetTable Title="Assets Table"
+            aTable="@State.AssetsTable"
+            getValuesFromId="@State.Form.GetValues"
+            Selected="@((pos) => RemoveFromBasket(pos))"
             />
+
+
 
 
 @code {
 
-    private AssetTable AssetTable { get; } = new AssetTable()
+    private State State { get; } = new State()
+    {
+        Form = new Form
+        {
+            Values = new List<Values>
+            {
+
+            new Values(1, 1200, 100, 4, 1),
+
+            }
+        }
+    };
+
+    private Values value = new Values();
+
+    [Parameter] public decimal StartingValue { get; set; }
+    [Parameter] public decimal SalvageValue { get; set; }
+    [Parameter] public int LifeTime { get; set; }
+    [Parameter] public int AgeOfAsset { get; set; }
+
+    private void runFormula()
+    {
+        value.StartingVal = StartingValue;
+        value.SalvageVal = SalvageValue;
+        value.LifeTime = LifeTime;
+        value.AgeOfAsset = AgeOfAsset;
+        Console.WriteLine($"The formula was ran and returned {value.Result}");
+
+    }
+
+    private AssetTable AssetTable { get; } = new AssetTable();
+
+    [Parameter]
+    public EventCallback Submit { get; set; }
+
+    //public Values val = new Values(1, 2000, 200, 4, 2);
+
+    private void AddToAsset(Values values)
+    {
+
+        Console.WriteLine($"Added to assets {values.StartingVal}");
+        State.AssetsTable.Add(values.Id);
+    }
+
+    private void RemoveFromBasket(int pos)
+    {
+        Console.WriteLine($"removed from assets {pos}");
+        State.AssetsTable.RemoveAt(pos);
+    }
+
 
 }

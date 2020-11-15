@@ -6,17 +6,12 @@ namespace MendozaP4DeprecCalc.Shared
 {
     public class DoubleDecliningFormula : Values
     {
-        //public decimal startingVal;
-        //public decimal salvageVal;
-        //public int lifeTime;
-        //public int ageOfAsset;
-        //public decimal result;
 
-        DoubleDecliningFormula()
+        public DoubleDecliningFormula():base(1, 100M, 10M, 10, 2)
         {
 
         }
-        private void Calc()
+        public override void Calc()
         {
             decimal depriciatedAssetCost = startingVal - salvageVal;
             double depRate = 1 / lifeTime;

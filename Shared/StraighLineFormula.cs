@@ -5,15 +5,11 @@ using System.Text;
 
 namespace MendozaP4DeprecCalc.Shared
 {
-    public class StraighLineFormula :Values
+    public class StraighLineFormula : Values
     {
-        //public decimal startingVal;
-        //public decimal salvageVal;
-        //public int lifeTime;
-        //public int ageOfAsset;
-        //public decimal result;
 
-        public StraighLineFormula()
+
+        public StraighLineFormula():base(1, 100M, 10M, 10, 2)
         {
 
         }
