@@ -29,28 +29,28 @@
 <p>
     <input type="number"
            name="startingVal"
-           @bind="@StartingValue"
+           @bind-value="@StartingValue"
            onfocus="this.value=''"/>
 </p>
 <p>Salvage Value</p>
 <p>
     <input type="number"
            name="salvageVal" 
-           @bind="@SalvageValue"
+           @bind-value="@SalvageValue"
            onfocus="this.value = ''"/>
 </p>
 <p>Estimated Life Time Of Asset</p>
 <p>
     <input type="number"
            name="estLifeTime"
-           @bind="@LifeTime"
+           @bind-value="@LifeTime"
            onfocus="this.value = ''"/>
 </p>
 <p>Age Of Assets In Years</p>
 <p>
     <input type="number"
            name="assetAgeInYrs"
-           @bind="@AgeOfAsset"
+           @bind-value="@AgeOfAsset"
            onfocus="this.value = ''"/>
 
 </p>
@@ -79,9 +79,12 @@
 </p>
 
 <p>
-    <textarea resize="none"
+    <text resize="none"
               rows="5"
-              style="width :600px"></textarea>
+              style="width :600px">
+
+    </text>
+
     @Math.Round(value.Result, 2)
 </p>
 
@@ -118,6 +121,7 @@
 
     private void runFormula()
     {
+
         value.StartingVal = StartingValue;
         value.SalvageVal = SalvageValue;
         value.LifeTime = LifeTime;

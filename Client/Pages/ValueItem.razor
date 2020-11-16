@@ -1,18 +1,18 @@
 ﻿<div class="row">
     <div class="col">
-        @value.StartingVal
+        @AssetsTable = State.Form.Values.StartingVal
     </div>
     <div class="col">
-        @value.SalvageVal
+        @AssetsTable
     </div>
     <div class="col">
-        @value.LifeTime
+        @AssetsTable
     </div>
     <div class="col">
-        @value.AgeOfAsset
+        @AssetsTable
     </div>
     <div class="col">
-        @value.Result
+        @AssetsTable
     </div>
     <div class="col">
         <button class="@ButtonClass"
@@ -25,6 +25,9 @@
 
 
 @code {
+    [Parameter] public AssetsTable AssetsTable { get; set; }
+
+
     [Parameter] public Values value { get; set; }
 
     [Parameter] public string ButtonTitle { get; set; }

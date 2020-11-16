@@ -55,7 +55,7 @@ namespace MendozaP4DeprecCalc.Shared
 
         public virtual void Calc()
         {
-            Result = 200;
+            Result = 1;
         }
     }
 }
